@@ -191,6 +191,7 @@ jobs:
           haxelib setup ~/haxelib
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
+          haxelib install extension-androidtools --quiet
 
       - name: Configure Android
         run: |

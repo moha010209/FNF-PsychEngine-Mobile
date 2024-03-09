@@ -31,13 +31,13 @@ class SUtil
 		switch (type)
 		{
 			case EXTERNAL_DATA:
-				daPath = android.content.Context.getExternalFilesDir(null);
+				daPath = AndroidContext.getExternalFilesDir(null);
 			case EXTERNAL_OBB:
-				daPath = android.content.Context.getObbDir();
+				daPath = AndroidContext.getObbDir();
 			case EXTERNAL:
-				daPath = android.os.Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file');
+				daPath = AndroidEnvironment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file');
 			case MEDIA:
-				daPath = android.os.Environment.getExternalStorageDirectory() + '/Android/media/' + Application.current.meta.get('packageName');
+				daPath = AndroidEnvironment.getExternalStorageDirectory() + '/Android/media/' + Application.current.meta.get('packageName');
 		}
 		#elseif ios
 		daPath = LimeSystem.documentsDirectory;
@@ -90,11 +90,11 @@ class SUtil
 	#if android
 	public static function doPermissionsShit():Void
 	{
-		if (!android.Permissions.getGrantedPermissions().contains(android.Permissions.READ_EXTERNAL_STORAGE)
-			&& !android.Permissions.getGrantedPermissions().contains(android.Permissions.WRITE_EXTERNAL_STORAGE))
+		if (!AndroidPermissions.getGrantedPermissions().contains(AndroidPermissions.READ_EXTERNAL_STORAGE)
+			&& !AndroidPermissions.getGrantedPermissions().contains(AndroidPermissions.WRITE_EXTERNAL_STORAGE))
 		{
-			android.Permissions.requestPermission(android.Permissions.READ_EXTERNAL_STORAGE);
-			android.Permissions.requestPermission(android.Permissions.WRITE_EXTERNAL_STORAGE);
+			AndroidPermissions.requestPermission(AndroidPermissions.READ_EXTERNAL_STORAGE);
+			AndroidPermissions.requestPermission(AndroidPermissions.WRITE_EXTERNAL_STORAGE);
 			showPopUp('If you accepted the permissions you are all good!' + '\nIf you didn\'t then expect a crash' + '\nPress Ok to see what happens',
 				'Notice!');
 			if (!AndroidEnvironment.isExternalStorageManager())

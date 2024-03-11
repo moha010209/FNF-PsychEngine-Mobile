@@ -1346,12 +1346,13 @@ class PlayState extends MusicBeatState
 				swagNote.noteType = songNotes[3];
 				if (songNotes[4] != null && songNotes[4] != []) {
 					swagNote.charSingers = songNotes[4];
-				} else if (gottaHitNote && !(section.gfSection && (songNotes[1]<4))) {
+				} else if (gottaHitNote && !(section.gfSection) && swagNote.noteType != 'GF Sing') {
 					swagNote.charSingers.push("bf");
-				} else if (!gottaHitNote && !(section.gfSection && (songNotes[1]<4))) {
+				} else if (!gottaHitNote && !(section.gfSection) && swagNote.noteType != 'GF Sing') {
 					swagNote.charSingers.push("dad");
 				} else {
 					swagNote.charSingers.push("gf");
+					swagNote.noteType = '';
 				}
 				if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
 

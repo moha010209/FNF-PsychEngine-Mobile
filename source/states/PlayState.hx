@@ -123,7 +123,7 @@ class PlayState extends MusicBeatState
 	#end
 	#end
 
-	public var characters:Map<String, Character> = new Map<String, Charater>();
+	public var characters:Map<String, Character> = new Map<String, Character>();
 
 	public var BF_X:Float = 770;
 	public var BF_Y:Float = 100;
@@ -455,17 +455,20 @@ class PlayState extends MusicBeatState
 			gf.scrollFactor.set(0.95, 0.95);
 			gfGroup.add(gf);
 			startCharacterScripts(gf.curCharacter);
+			characters.set("gf", gf);
 		}
 
 		dad = new Character(0, 0, SONG.player2);
 		startCharacterPos(dad, true);
 		dadGroup.add(dad);
 		startCharacterScripts(dad.curCharacter);
+		characters.set("dad", dad);
 
 		boyfriend = new Character(0, 0, SONG.player1, true);
 		startCharacterPos(boyfriend);
 		boyfriendGroup.add(boyfriend);
 		startCharacterScripts(boyfriend.curCharacter);
+		characters.set("bf", boyfriend);
 
 		var camPos:FlxPoint = FlxPoint.get(girlfriendCameraOffset[0], girlfriendCameraOffset[1]);
 		if(gf != null)
@@ -2262,6 +2265,7 @@ class PlayState extends MusicBeatState
 							iconP1.changeIcon(boyfriend.healthIcon);
 						}
 						setOnScripts('boyfriendName', boyfriend.curCharacter);
+						characters.set("bf", boyfriend);
 
 					case 1:
 						if(dad.curCharacter != value2) {
@@ -2284,6 +2288,7 @@ class PlayState extends MusicBeatState
 							iconP2.changeIcon(dad.healthIcon);
 						}
 						setOnScripts('dadName', dad.curCharacter);
+						characters.set("dad", dad);
 
 					case 2:
 						if(gf != null)
@@ -2300,6 +2305,7 @@ class PlayState extends MusicBeatState
 								gf.alpha = lastAlpha;
 							}
 							setOnScripts('gfName', gf.curCharacter);
+							characters.set("gf", gf);
 						}
 				}
 				reloadHealthBarColors();

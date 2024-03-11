@@ -47,6 +47,8 @@ class Note extends FlxSprite
 	public var canBeHit:Bool = false;
 	public var tooLate:Bool = false;
 
+	public var charSingers:Array = [];
+
 	public var wasGoodHit:Bool = false;
 	public var missed:Bool = false;
 

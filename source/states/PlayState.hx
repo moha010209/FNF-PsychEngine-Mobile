@@ -1343,16 +1343,18 @@ class PlayState extends MusicBeatState
 				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
 				swagNote.mustPress = gottaHitNote;
 				swagNote.sustainLength = songNotes[2];
+				swagNote.gfNote = (section.gfSection && (songNotes[1]<4));
 				swagNote.noteType = songNotes[3];
 				if (songNotes[4] != null && songNotes[4] != []) {
 					swagNote.charSingers = songNotes[4];
-				} else if (gottaHitNote && !(section.gfSection) && swagNote.noteType != 'GF Sing') {
+				} else if (gottaHitNote && (!swagNote.gfNote && swagNote.noteType != 'GF Sing')) {
 					swagNote.charSingers.push("bf");
-				} else if (!gottaHitNote && !(section.gfSection) && swagNote.noteType != 'GF Sing') {
+				} else if (!gottaHitNote && (!swagNote.gfNote && swagNote.noteType != 'GF Sing')) {
 					swagNote.charSingers.push("dad");
 				} else {
 					swagNote.charSingers.push("gf");
 					swagNote.noteType = '';
+					swagNote.gfNote = false;
 				}
 				if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
 
@@ -1370,7 +1372,7 @@ class PlayState extends MusicBeatState
 
 						var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote), daNoteData, oldNote, true);
 						sustainNote.mustPress = gottaHitNote;
-						sustainNote.gfNote = (section.gfSection && (songNotes[1]<4));
+						sustainNote.gfNote = swagNote.gfNote;
 						sustainNote.noteType = swagNote.noteType;
 						sustainNote.charSingers = swagNote.charSingers;
 						sustainNote.scrollFactor.set();
